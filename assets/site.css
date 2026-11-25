@@ -88,7 +88,37 @@ button { font: inherit; }
   transition: background-color .2s, color .2s, border-color .2s;
 }
 .button:hover { background: var(--accent); border-color: var(--accent); color: white; }
-.arrow { font-family: Arial, sans-serif; font-size: 1.25em; }
+/* CSS shapes keep the arrows independent of the device's emoji fonts. */
+.arrow {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  vertical-align: -.15em;
+}
+.arrow::before, .arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  box-sizing: border-box;
+}
+.arrow::before {
+  left: 16%;
+  width: 65%;
+  border-top: 1.5px solid currentColor;
+  transform: translateY(-50%);
+}
+.arrow::after {
+  right: 26%;
+  width: .36em;
+  height: .36em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+}
+.arrow--left { transform: rotate(180deg); }
+.arrow--up-right { transform: rotate(-45deg); }
 .media {
   --media-start: #243c59;
   --media-end: #111c32;
@@ -146,6 +176,21 @@ button { font: inherit; }
   cursor: pointer;
 }
 .carousel-controls button:hover { border-color: #a8b8cf; }
+.playback-icon {
+  box-sizing: border-box;
+  width: .58em;
+  height: .65em;
+  border-right: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+}
+[data-playing="false"] .playback-icon {
+  width: 0;
+  height: 0;
+  border-top: .34em solid transparent;
+  border-bottom: .34em solid transparent;
+  border-right: 0;
+  border-left: .55em solid currentColor;
+}
 .slide-count { min-width: 3.4em; text-align: center; font-size: .75rem; font-variant-numeric: tabular-nums; }
 .resume { max-width: 79ch; margin-top: clamp(28px, 5vw, 58px); }
 .resume p:last-child { margin-bottom: 0; }

@@ -69,7 +69,7 @@ if (carousel) {
   }
 
   function updatePlayback() {
-    toggle.textContent = playing ? "Ⅱ" : "▶";
+    toggle.dataset.playing = String(playing);
     toggle.setAttribute("aria-label", playing ? "Pause slideshow" : "Play slideshow");
     schedule();
   }
